@@ -1,0 +1,57 @@
+package arbolbinario;
+
+import java.lang.ProcessHandle.Info;
+
+public class AbInt {
+	
+	private Nodo raiz;
+	
+	public class Nodo{
+		private Integer info;
+		private Nodo izquierda;
+		private Nodo derecha;
+		public Nodo(Integer info) {
+			this.info = info;
+		}
+		
+		public String toString() {
+			return info.toString();
+		}	
+	}
+
+	
+	//--------------- METODOS DE ARBOL RAIZ --------------
+	
+	public int cantNodos() {
+		return cantNodos(raiz);
+	}
+	
+	public int cantNodos(Nodo n) {
+		if(n == null) return 0;
+		else return 1 + cantNodos(n.izquierda) + cantNodos(n.derecha);
+	}
+	
+	public void agregarNodo(int valor) {
+		if(raiz == null) raiz = new Nodo(valor);
+		else agregarNodo(raiz, valor);
+	}
+	
+	public void agregarNodo(Nodo n, int valor) {
+		//asuminos que n no es null
+		if(n.derecha == null) n.derecha = new Nodo(valor);
+		else agregarNodo(n.derecha, valor);
+	}
+	
+	public String toString(Nodo n) {
+		String ret = "";
+		if(n != null) {
+			ret = ret + n.info + "";
+			ret = ret + toString(n.derecha);
+			ret = ret + toString(n.izquierda);
+		}
+		return ret;
+	}
+	
+	
+
+}

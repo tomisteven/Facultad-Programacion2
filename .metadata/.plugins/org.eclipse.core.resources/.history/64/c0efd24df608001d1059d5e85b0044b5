@@ -1,0 +1,251 @@
+package lst;
+
+public class Lista1 {
+	
+	private Nodo primero;
+	
+	//muestra el array
+	public String toString() {
+		String corchete = "[ ";
+		//actual es el primero de la lista
+		Nodo actual = primero;
+		while (actual != null) {
+			//al corchete le anidamos todos los elementos de la lista 
+			corchete += actual.elemento + " , " ;
+			//luego al actual lo reemplazamos por el siguiente, es como un ++
+			actual = actual.siguiente; 
+			
+		}
+		return corchete + " ]";
+	}
+	
+	public boolean estaVacia() {
+		Nodo actual = primero;
+		int pos = 0;
+		while(actual != null && actual.siguiente != null) {
+			pos++;
+			actual = actual.siguiente;
+		}
+		if(pos > 1) {
+			return false;
+		}
+		return true;		
+	}
+	
+	public void agregarAdelante(int valor) {
+		//creamos un nuevo nodo para agregar
+		Nodo nuevo = new Nodo();
+		//el nuevo nodo va a tener un valor que es el que se pasa como parametro
+		nuevo.elemento = valor;
+		//el siguiente del nodo va a ser el primero original
+		
+		nuevo.siguiente = primero;
+		//el nuevo primero pasa a ser el nuevo valor
+		primero = nuevo;
+	}
+	
+	public int size() {
+		int len = 0 ;
+		for(Nodo actual = primero; actual != null;actual= actual.siguiente){
+			len++;
+		}
+		return len;
+	}	
+	
+	public void agregarAtras(int valor) {
+		Nodo ultimo = new Nodo();
+		ultimo.elemento = valor;
+		if(primero == null) {
+			primero = ultimo;
+			return;
+		}
+		Nodo n = primero;
+		while(n.siguiente != null){
+			n = n.siguiente;
+		}
+		n.siguiente = ultimo;		
+	}
+	
+	public void quitar(int x) {
+		if(primero != null && primero.elemento == x) {
+			primero = primero.siguiente;
+			return;
+		}
+		Nodo actual = primero;
+		Nodo XX =  null;
+		
+		while(actual != null && actual.elemento != x) {
+			XX = actual;
+			actual = actual.siguiente;
+			
+		}
+		if(actual != null) {
+			XX.siguiente = actual.siguiente;
+		}
+	}
+	
+	public String quitarDuplicadosV2() {	
+		Nodo actual = primero;
+		String noditos = "[ ";
+		while(actual != null && actual.siguiente != null) {
+			if(actual.elemento != actual.siguiente.elemento) {
+				noditos+=actual.elemento + ",";
+				actual = actual.siguiente;				
+			}
+			else {
+				actual = actual.siguiente;
+			}			
+		}
+		return noditos + "]";
+		
+	}
+	
+	
+	//devuelve una posicion de un elemento
+	public int elemento(int i) {
+		Nodo actual = primero;
+		int pos = 0;
+		while(actual != null) {
+			if(pos == i) {
+				return actual.elemento;
+			}
+			actual = actual.siguiente;
+			pos++;
+		}
+		return -1;
+	}	
+	//esta condicionado al elemento que devuelve una posicion
+	// la cantidad de apariciones devuelve la cantidad de veces que aparece un elemento repetido
+	public int cantidadApariciones(int i) {
+		int aparicion = 0;
+		int j = 0;
+		while(j <= this.size()) {
+			if(elemento(j) == i) {
+				aparicion++;
+			}
+			j++;
+		}
+		return aparicion;
+	}
+	public int cantidadApariciones2(int i) {
+		int aparicion = 0;
+		int f = 0;
+		for(int x = 0; x <= this.size(); x++) {
+			if(elemento(f) == i) {
+				aparicion++;
+			}
+			f++;
+		}	
+		return aparicion;
+	}
+	
+	//quitamos duplicados de la lista
+	public void quitarDuplicados() {
+		Nodo actual = primero;
+		while(actual != null) {
+			if(this.cantidadApariciones2(actual.elemento) > 1) {
+				this.quitar(actual.elemento);
+			}else {
+				actual = actual.siguiente;
+			}
+		}
+	}
+	
+	
+	public void paresMenoresQue(int k) {
+		Nodo actual = primero;
+		System.out.print("[");
+		
+		while(actual != null && actual.siguiente != null) {
+			if(actual.elemento < k &&  actual.elemento%2==0) {
+				
+				actual= actual.siguiente;
+			}
+			else {
+				System.out.print(actual.elemento + ",") ;
+				actual = actual.siguiente;
+			}
+		}
+		System.out.println("]");
+		
+		
+	}
+	
+	public int sumaElementos() {
+		int prom = 0 ;
+		for(Nodo actual = primero; actual != null;actual= actual.siguiente){
+			prom+=actual.elemento;
+		}
+		return prom;
+	}
+	
+	public int promedio() {
+		 int sumaTotal = 0;
+		 int pos= 0;
+		for(Nodo actual = primero; actual != null; actual = actual.siguiente) {
+			sumaTotal+=actual.elemento;
+			pos++;
+		}
+		int promedio = sumaTotal/pos;
+		return promedio;
+	}
+	
+	
+	public void eliminarMenoresAlPromedio() {
+		Nodo actual = primero;
+		System.out.print("[");
+		while(actual != null && actual.siguiente != null) {
+			if(this.sumaElementos()/this.size() > actual.elemento){
+				//this.quitar(actual.elemento);
+				actual= actual.siguiente;
+			}
+			else {
+				System.out.print(actual.elemento + ",") ;
+				actual = actual.siguiente;
+			}
+		}
+		System.out.print("]");
+	}
+	
+
+//	public void invertir() {
+//		Nodo actual = primero;		
+//		while(actual != null) {
+//			if(this.size() == 1) {
+//				return;
+//			}
+//			else {
+//				this.agregarAtras(actual.elemento);
+//				actual = actual.siguiente;
+//			}
+//		}
+//	}
+	
+	
+	
+	//actual.elemento es el elemento actual de la lista
+	//actual.siguiente es el elemento que le sigue al actual
+	//para ejecutar es un while mientras que actual sea distinto de null
+
+	public static void main(String[] args) {
+		Lista1 lst = new Lista1();
+		//agregamos un numero adelante
+		//lst.paresMenoresQue(7);
+		lst.agregarAdelante(6);
+		lst.agregarAdelante(5);
+		lst.agregarAdelante(4);
+		lst.agregarAdelante(3);
+		lst.agregarAdelante(2);
+		lst.agregarAdelante(1);
+		//lst.invertir();
+		System.out.println(lst);
+		System.out.println(lst.promedio());
+		System.out.println(lst.sumaElementos()/lst.size());
+		lst.eliminarMenoresAlPromedio();
+		System.out.print(lst.estaVacia());
+		
+		
+
+	}
+
+}

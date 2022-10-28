@@ -1,0 +1,10 @@
+package arbolbinario;
+
+public class Test {
+
+	public static void main(String[] args) {
+		AbInt arbol1 = new AbInt();
+		System.out.println(arbol1.cantNodos());
+	}
+
+}

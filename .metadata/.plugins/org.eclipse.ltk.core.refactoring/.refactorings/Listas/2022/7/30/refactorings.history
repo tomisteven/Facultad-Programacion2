@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename method &apos;lst.Lista1.promedio()&apos; to &apos;sumaElementos&apos;&#x0D;&#x0A;- Original project: &apos;Listas&apos;&#x0D;&#x0A;- Original element: &apos;lst.Lista1.promedio()&apos;&#x0D;&#x0A;- Renamed element: &apos;lst.Lista1.sumaElementos()&apos;&#x0D;&#x0A;- Update references to refactored element" delegate="false" deprecate="false" description="Rename method &apos;promedio&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.method" input="/src&lt;lst{Lista1.java[Lista1~promedio" name="sumaElementos" references="true" stamp="1658408095200" version="1.0"/>
+</session>

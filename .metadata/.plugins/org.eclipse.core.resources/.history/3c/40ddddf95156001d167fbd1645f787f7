@@ -1,0 +1,25 @@
+package arbolbinario;
+
+public class AbInt {
+	
+	public class Nodo{
+		private Integer info;
+		private Nodo izquierda;
+		private Nodo derecha;
+		public Nodo(Integer info) {
+			this.info = info;
+		}
+		
+		public String toString() {
+			return info.toString();
+		}	
+	}
+
+	
+	//--------------- METODOS DE ARBOL RAIZ --------------
+	
+	public int cantNodos() {
+		return 1;
+	}
+
+}
